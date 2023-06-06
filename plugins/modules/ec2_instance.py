@@ -1293,6 +1293,8 @@ def build_top_level_options(params):
             spec["Placement"]["GroupName"] = str(params.get("placement_group"))
         else:
             spec.setdefault("Placement", {"GroupName": str(params.get("placement_group"))})
+    if params.get('additional_info'):
+        spec['AdditionalInfo'] = params.get('additional_info')
     if params.get("ebs_optimized") is not None:
         spec["EbsOptimized"] = params.get("ebs_optimized")
     if params.get("instance_initiated_shutdown_behavior"):
@@ -2073,6 +2075,7 @@ def main():
         image_id=dict(type="str"),
         instance_type=dict(type="str"),
         user_data=dict(type="str"),
+        additional_info=dict(type='str'),
         aap_callback=dict(
             type="dict",
             aliases=["tower_callback"],
